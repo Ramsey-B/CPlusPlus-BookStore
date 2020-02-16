@@ -8,12 +8,12 @@
 int main()
 {
     std::cout << "Hello World!\n";
-    /*Book book("Catcher in the Rye", "J. D. Salinger", 10);
+    Book book("Catcher in the Rye", "J. D. Salinger", 10);
 
     std::ofstream out("library.txt");
     out << book;
 
-    out.close();*/
+    out.close();
 
     Book bookFromFile;
     std::ifstream in("library.txt");
@@ -21,7 +21,7 @@ int main()
 
     in.close();
 
-    std::cout << bookFromFile;
+    std::cout << bookFromFile.Name << "\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

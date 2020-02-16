@@ -56,6 +56,17 @@ public:
 		return in;
 	}
 
+	friend std::istream& operator >> (std::istream& in, Book* obj)
+	{
+		in >> obj->Id;
+		in >> obj->Name;
+		in >> obj->Author;
+		in >> obj->Stock;
+		obj->Name = Replace(obj->Name, '_', ' ');
+		obj->Author = Replace(obj->Author, '_', ' ');
+		return in;
+	}
+
 private:
 	std::string Generate_Id();
 	static std::string Replace(std::string str, char replaceChar, char addChar)
