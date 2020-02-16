@@ -9,15 +9,15 @@
 class Book
 {
 public:
-	std::string Name;
+	std::string Title;
 	std::string Author;
 	std::string CheckOutBy;
 	int Stock;
 	std::string Id;
 
-	Book(std::string name = "", std::string author = "", int stock = 0, std::string id = "", std::string checkoutBy = "")
+	Book(std::string title = "", std::string author = "", int stock = 0, std::string id = "", std::string checkoutBy = "")
 	{
-		Name = name;
+		Title = title;
 		Author = author;
 		Stock = stock;
 		if (id.empty())
@@ -30,7 +30,7 @@ public:
 
 	bool operator==(const Book& obj)
 	{
-		return (Id == obj.Id) && (Name == obj.Name) && (Author == obj.Author) && (Stock == obj.Stock);
+		return (Id == obj.Id) && (Title == obj.Title) && (Author == obj.Author) && (Stock == obj.Stock);
 	}
 
 	/*
@@ -38,7 +38,7 @@ public:
 	 */
 	friend std::ostream& operator << (std::ostream& out, const Book& obj)
 	{
-		out << obj.Id << "\n" << Replace(obj.Name, ' ', '_') << "\n" << Replace(obj.Author, ' ', '_') << "\n" << obj.Stock << std::endl;
+		out << obj.Id << "\n" << Replace(obj.Title, ' ', '_') << "\n" << Replace(obj.Author, ' ', '_') << "\n" << obj.Stock << std::endl;
 		return out;
 	}
 
@@ -48,10 +48,10 @@ public:
 	friend std::istream& operator >> (std::istream& in, Book& obj)
 	{
 		in >> obj.Id;
-		in >> obj.Name;
+		in >> obj.Title;
 		in >> obj.Author;
 		in >> obj.Stock;
-		obj.Name = Replace(obj.Name, '_', ' ');
+		obj.Title = Replace(obj.Title, '_', ' ');
 		obj.Author = Replace(obj.Author, '_', ' ');
 		return in;
 	}
@@ -59,10 +59,10 @@ public:
 	friend std::istream& operator >> (std::istream& in, Book* obj)
 	{
 		in >> obj->Id;
-		in >> obj->Name;
+		in >> obj->Title;
 		in >> obj->Author;
 		in >> obj->Stock;
-		obj->Name = Replace(obj->Name, '_', ' ');
+		obj->Title = Replace(obj->Title, '_', ' ');
 		obj->Author = Replace(obj->Author, '_', ' ');
 		return in;
 	}
