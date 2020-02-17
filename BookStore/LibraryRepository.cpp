@@ -17,7 +17,6 @@ void LibraryRepository::Remove(std::string id)
 	books.remove(book);
 	delete book;
 	UpdateFile(books);
-	DeleteBookList(books);
 }
 
 void LibraryRepository::Update(std::string id, Book& updatedbook)
@@ -29,7 +28,6 @@ void LibraryRepository::Update(std::string id, Book& updatedbook)
 		{
 			book = new Book(updatedbook);
 		}
-		delete book;
 	}
 	UpdateFile(books);
 }
@@ -61,7 +59,7 @@ Book* LibraryRepository::Get(std::string id)
 	{
 		if (book->Id == id)
 		{
-			foundBook = book;
+			foundBook = new Book(*book);
 		}
 		delete book;
 	}
@@ -76,7 +74,7 @@ Book* LibraryRepository::GetByTitle(std::string title)
 	{
 		if (book->Title == title)
 		{
-			foundBook = book;
+			foundBook = new Book(*book);
 		}
 		delete book;
 	}

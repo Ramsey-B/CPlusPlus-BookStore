@@ -38,7 +38,7 @@ public:
 	 */
 	friend std::ostream& operator << (std::ostream& out, const Book& obj)
 	{
-		out << obj.Id << "\n" << Replace(obj.Title, ' ', '_') << "\n" << Replace(obj.Author, ' ', '_') << "\n" << obj.Stock << std::endl;
+		out << "id:" << obj.Id << ";title:" << Replace(obj.Title, ' ', '_') << ";author:" << Replace(obj.Author, ' ', '_') << ";stock:" << obj.Stock << ";"<< std::endl;
 		return out;
 	}
 
