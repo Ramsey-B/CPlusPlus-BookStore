@@ -39,15 +39,15 @@ int main()
 		}
 		else if (command == "c" || command == "checkout")
 		{
-
+			CheckoutBook();
 		}
 		else if (command == "l" || command == "list")
 		{
-
+			ListBooks();
 		}
 		else if (command == "s" || command == "search")
 		{
-
+			SearchBooks();
 		}
 		else if (command == "exit")
 		{
@@ -119,6 +119,45 @@ void CheckoutBook()
 	}
 	auto bookAsString = BookAsString(*book);
 	std::cout << "Checkout book | " + bookAsString + "\n";
+	delete book;
+}
+
+void ListBooks()
+{
+	std::cout << "The library currently contains the following books: \n";
+	auto books = bookService->GetAll();
+	int count = 1;
+	for (Book* book : books)
+	{
+		auto bookAsString = BookAsString(*book);
+		std::cout << "Book #" + std::to_string(count) + ": " + bookAsString + "\n";
+		delete book; 
+		count = count + 1;
+	}
+}
+
+void SearchBooks()
+{
+	std::string selection;
+	Book* book;
+	std::cout << "Would you like to search by 'id' or 'title'.\n";
+	std::getline(std::cin, selection);
+	if (selection == "id")
+	{
+		std::string id;
+		std::cout << "Please enter the book Id.\n";
+		std::getline(std::cin, id);
+		book = bookService->Get(id);
+	}
+	else if (selection == "title")
+	{
+		std::string title;
+		std::cout << "Please enter the book title.\n";
+		std::getline(std::cin, title);
+		book = bookService->GetByTitle(title);
+	}
+	auto bookAsString = BookAsString(*book);
+	std::cout << "Found book | " + bookAsString + "\n";
 	delete book;
 }
 
