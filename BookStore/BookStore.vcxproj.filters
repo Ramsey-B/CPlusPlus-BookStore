@@ -24,12 +24,24 @@
     <ClCompile Include="LibraryRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BookService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OutOfStockException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Book.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LibraryRepository.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BookService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OutOfStockException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,9 +10,8 @@ public:
 	std::list<Book*> GetAll();
 	Book* Get(std::string id);
 	Book* GetByTitle(std::string title);
-
-private:
 	void DeleteBookList(std::list<Book*> books);
+private:
 	void UpdateFile(std::list<Book*> books);
 };
 
