@@ -6,6 +6,7 @@
 #include <fstream>;
 #include "BookStore.h"
 #include "BookService.h"
+#include "ConsoleService.h"
 
 BookService* bookService;
 
@@ -13,7 +14,7 @@ int main()
 {
     std::cout << "Hello World!\n";
 	bool done = false;
-	bookService = new BookService();
+	ConsoleService* consoleService = new ConsoleService();
 	while (!done)
 	{
 		std::string command;
@@ -31,23 +32,23 @@ int main()
 		}
 		else if (command == "a" || command == "add")
 		{
-			AddBook();
+			consoleService->AddBook();
 		}
 		else if (command == "r" || command == "remove")
 		{
-			RemoveBook();
+			consoleService->RemoveBook();
 		}
 		else if (command == "c" || command == "checkout")
 		{
-			CheckoutBook();
+			consoleService->CheckoutBook();
 		}
 		else if (command == "l" || command == "list")
 		{
-			ListBooks();
+			consoleService->ListBooks();
 		}
 		else if (command == "s" || command == "search")
 		{
-			SearchBooks();
+			consoleService->SearchBooks();
 		}
 		else if (command == "exit")
 		{
@@ -58,112 +59,7 @@ int main()
 			std::cout << "Invalid input. Please try again.\n";
 		}
 	}
-	delete bookService;
-}
-
-void AddBook()
-{
-	std::string title;
-	std::string author;
-	std::string stock;
-
-	std::cout << "Please enter the book title.\n";
-	std::getline(std::cin, title);
-	std::cout << "Please enter the book author.\n";
-	std::getline(std::cin, author);
-	std::cout << "Please enter the book stock count.\n";
-	std::getline(std::cin, stock);
-
-	Book* book = new Book(title, author, std::stoi(stock));
-	auto created = bookService->Add(*book);
-	if (created)
-	{
-		std::cout << "The book was added to the library.\n";
-	}
-	std::cout << "Unable to create the book. Please try again.\n";
-	delete book;
-}
-
-void RemoveBook()
-{
-	std::string id;
-	std::cout << "Please enter the Id of the book to remove.\n";
-	std::getline(std::cin, id);
-	auto removed = bookService->Remove(id);
-	if (remove)
-	{
-		std::cout << "The book was removed library.\n";
-	}
-	std::cout << "Unable to remove the book. Please try again.\n";
-}
-
-void CheckoutBook()
-{
-	std::string selection;
-	Book* book;
-	std::cout << "Would you like to checkout by 'id' or 'title'.\n";
-	std::getline(std::cin, selection);
-	if (selection == "id")
-	{
-		std::string id;
-		std::cout << "Please enter the book Id.\n";
-		std::getline(std::cin, id);
-		book = bookService->Checkout(id);
-	}
-	else if (selection == "title")
-	{
-		std::string title;
-		std::cout << "Please enter the book title.\n";
-		std::getline(std::cin, title);
-		book = bookService->CheckoutByTitle(title);
-	}
-	auto bookAsString = BookAsString(*book);
-	std::cout << "Checkout book | " + bookAsString + "\n";
-	delete book;
-}
-
-void ListBooks()
-{
-	std::cout << "The library currently contains the following books: \n";
-	auto books = bookService->GetAll();
-	int count = 1;
-	for (Book* book : books)
-	{
-		auto bookAsString = BookAsString(*book);
-		std::cout << "Book #" + std::to_string(count) + ": " + bookAsString + "\n";
-		delete book; 
-		count = count + 1;
-	}
-}
-
-void SearchBooks()
-{
-	std::string selection;
-	Book* book;
-	std::cout << "Would you like to search by 'id' or 'title'.\n";
-	std::getline(std::cin, selection);
-	if (selection == "id")
-	{
-		std::string id;
-		std::cout << "Please enter the book Id.\n";
-		std::getline(std::cin, id);
-		book = bookService->Get(id);
-	}
-	else if (selection == "title")
-	{
-		std::string title;
-		std::cout << "Please enter the book title.\n";
-		std::getline(std::cin, title);
-		book = bookService->GetByTitle(title);
-	}
-	auto bookAsString = BookAsString(*book);
-	std::cout << "Found book | " + bookAsString + "\n";
-	delete book;
-}
-
-std::string BookAsString(Book& book)
-{
-	return "Id: " + book.Id + " | Title: " + book.Title + " | Author: " + book.Author + " | Stock: " + std::to_string(book.Stock);
+	delete consoleService;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

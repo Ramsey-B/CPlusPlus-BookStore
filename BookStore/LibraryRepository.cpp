@@ -27,11 +27,10 @@ void LibraryRepository::Update(std::string id, Book& updatedbook)
 		if (book->Id == id)
 		{
 			book = new Book(updatedbook);
-			break;
 		}
+		delete book;
 	}
 	UpdateFile(books);
-	DeleteBookList(books);
 }
 
 std::list<Book*> LibraryRepository::GetAll()
@@ -62,10 +61,9 @@ Book* LibraryRepository::Get(std::string id)
 		if (book->Id == id)
 		{
 			foundBook = book;
-			break;
 		}
+		delete book;
 	}
-	DeleteBookList(books);
 	return foundBook;
 }
 
@@ -78,10 +76,9 @@ Book* LibraryRepository::GetByTitle(std::string title)
 		if (book->Title == title)
 		{
 			foundBook = book;
-			break;
 		}
+		delete book;
 	}
-	DeleteBookList(books);
 	return foundBook;
 }
 

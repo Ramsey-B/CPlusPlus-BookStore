@@ -150,12 +150,14 @@
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="BookService.cpp" />
     <ClCompile Include="BookStore.cpp" />
+    <ClCompile Include="ConsoleService.cpp" />
     <ClCompile Include="LibraryRepository.cpp" />
     <ClCompile Include="OutOfStockException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="BookService.h" />
+    <ClInclude Include="ConsoleService.h" />
     <ClInclude Include="LibraryRepository.h" />
     <ClInclude Include="OutOfStockException.h" />
   </ItemGroup>
