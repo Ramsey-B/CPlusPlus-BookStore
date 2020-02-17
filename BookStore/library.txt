@@ -1,8 +1,2 @@
-frAQBc8W
-yeet
-Ramsey_Bland
-2
-sa1xVPfv
-big_buns
-Diane
-4
+id:frAQBc8W;title:yeet;author:Ramsey_Bland;stock:2
+id:sa1xVPfv;title:big_buns;author:Diane;stock:4

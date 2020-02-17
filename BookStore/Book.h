@@ -47,10 +47,28 @@ public:
 	 */
 	friend std::istream& operator >> (std::istream& in, Book& obj)
 	{
-		in >> obj.Id;
-		in >> obj.Title;
-		in >> obj.Author;
-		in >> obj.Stock;
+		std::string str;
+		in >> str;
+		std::string propName = "";
+		std::string value = "";
+		bool passedProp = false;
+		for (int i = 0; i < str.length(); ++i)
+		{
+			char strChar = str[i];
+			if (strChar == ':') passedProp = true;
+			else if (strChar == ';')
+			{
+				if (propName == "id") obj.Id = value;
+				if (propName == "title") obj.Title = value;
+				if (propName == "author") obj.Author = value;
+				if (propName == "stock") obj.Stock = std::stoi(value);
+				passedProp = false;
+				propName = "";
+				value = "";
+			}
+			else if (!passedProp) propName += strChar;
+			else if (passedProp) value += strChar;
+		}
 		obj.Title = Replace(obj.Title, '_', ' ');
 		obj.Author = Replace(obj.Author, '_', ' ');
 		return in;
@@ -58,10 +76,28 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, Book* obj)
 	{
-		in >> obj->Id;
-		in >> obj->Title;
-		in >> obj->Author;
-		in >> obj->Stock;
+		std::string str;
+		in >> str;
+		std::string propName = "";
+		std::string value = "";
+		bool passedProp = false;
+		for (int i = 0; i < str.length(); ++i)
+		{
+			char strChar = str[i];
+			if (strChar == ':') passedProp = true;
+			else if (strChar == ';')
+			{
+				if (propName == "id") obj->Id = value;
+				if (propName == "title") obj->Title = value;
+				if (propName == "author") obj->Author = value;
+				if (propName == "stock") obj->Stock = std::stoi(value);
+				passedProp = false;
+				propName = "";
+				value = "";
+			}
+			else if (!passedProp) propName += strChar;
+			else if (passedProp) value += strChar;
+		}
 		obj->Title = Replace(obj->Title, '_', ' ');
 		obj->Author = Replace(obj->Author, '_', ' ');
 		return in;
