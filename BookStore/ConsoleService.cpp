@@ -19,7 +19,10 @@ void ConsoleService::AddBook()
 	{
 		std::cout << "The book was added to the library.\n";
 	}
-	std::cout << "Unable to create the book. Please try again.\n";
+	else
+	{
+		std::cout << "Unable to create the book. Please try again.\n";
+	}
 	delete book;
 }
 
@@ -65,29 +68,16 @@ void ConsoleService::CheckoutBook()
 
 void ConsoleService::ListBooks()
 {
-	std::string selection;
-	std::string bookAsString = "";
-	std::cout << "Would you like to checkout by 'id' or 'title'.\n";
-	std::getline(std::cin, selection);
-	if (selection == "id")
+	std::cout << "The library currently contains the following books: \n";
+	auto books = bookService->GetAll();
+	int count = 1;
+	for (Book* book : books)
 	{
-		std::string id;
-		std::cout << "Please enter the book Id.\n";
-		std::getline(std::cin, id);
-		auto book = bookService->Checkout(id);
-		bookAsString = BookAsString(*book);
+		auto bookAsString = BookAsString(*book);
+		std::cout << "Book #" + std::to_string(count) + ": " + bookAsString + "\n";
 		delete book;
+		count = count + 1;
 	}
-	else if (selection == "title")
-	{
-		std::string title;
-		std::cout << "Please enter the book title.\n";
-		std::getline(std::cin, title);
-		auto book = bookService->CheckoutByTitle(title);
-		bookAsString = BookAsString(*book);
-		delete book;
-	}
-	std::cout << "Checkout book | " + bookAsString + "\n";
 }
 
 void ConsoleService::SearchBooks()

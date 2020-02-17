@@ -18,6 +18,7 @@ int main()
 	while (!done)
 	{
 		std::string command;
+		std::cout << "\n";
 		std::getline(std::cin, command);
 		if (command == "h" || command == "help")
 		{

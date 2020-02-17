@@ -1,9 +1,10 @@
 #include "LibraryRepository.h"
 #include <sstream>
+#include <iostream>
 
 void LibraryRepository::Add(Book& book)
 {
-	std::ofstream out("library.txt");
+	std::ofstream out("library.txt", std::ios::app);
 	out << book;
 
 	out.close();
